@@ -13,9 +13,10 @@ $(function() {
         caseSensitive: false,
         ignorePunctuation: true,
         timeOut: false,
+        tableResult: false,
         
         init: function() {
-            tableResult = $('#table-results').dataTable({
+            this.tableResult = $('#table-results').dataTable({
 				"dom": 'Tlfrtip',
 				"tableTools": {
 					"sSwfPath": "vendor/DataTables/swf/copy_csv_xls.swf",
@@ -24,7 +25,10 @@ $(function() {
 						"sButtonText": "Download",
 						"aButtons": [ "csv", "xls" ]
 					}] 
-				}
+				},
+				"fnCreatedRow": function( nRow, aData, iDataIndex ) {
+					$('td:eq(0)', nRow).prepend('<a class="btn btn-danger btn-xs remove-word" data-index="'+iDataIndex+'" data-word="'+aData[0]+'"><span class="glyphicon glyphicon-remove"></span></a>');
+				},
 				
             });
             
@@ -51,7 +55,9 @@ $(function() {
 			$('#option-ignore-punctuation').click(function() {
 				w.ignorePunctuation = $(this).is(':checked');
 			});
-               
+            
+            
+            
             $('#submit_count').click(function() {
 				$(this).addClass('disabled');
 				$('#processing').modal('show');
@@ -112,14 +118,30 @@ $(function() {
 			}
 			
 			if (table.length > 0) {
-				tableResult.dataTable().fnClearTable();
-				tableResult.dataTable().fnAddData(table);
+				this.tableResult.dataTable().fnClearTable();
+				this.tableResult.dataTable().fnAddData(table);
 				$('#table-results_wrapper').show();
 				$('#initial-text').hide();
+				
+				
+				var _t = this;
+				$('a.remove-word').click(function() {
+					var word = $(this).data('word');
+					var index = $(this).data('index');
+					
+					if ($('#excluded_input').val() != '')
+						word = "\n" + word;
+					$('#excluded_input').val( $('#excluded_input').val() + word );
+					
+					_t.tableResult.dataTable().api().row( $(this).parents('tr') ).remove().draw();
+				});
 			} else {
 				$('#table-results_wrapper').hide();
 				$('#initial-text').show();
 			}
+			
+			
+			
 		},
         
         countAndDeleteJoins: function() {

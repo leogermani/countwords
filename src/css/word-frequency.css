@@ -17,3 +17,25 @@
 #table-results_wrapper {
 	display: none;
 }
+
+
+tr .remove-word {
+	display:none;
+}
+
+tr:hover .remove-word {
+	display:inline;
+	margin-right:10px;
+}
+
+td:first-child {
+	padding-left: 34px !important;
+}
+
+tr:hover td:first-child {
+	padding-left: 0px !important;
+}
+
+#button-about {
+	cursor: pointer;
+}
