@@ -106,11 +106,20 @@ $(function() {
         renderTable: function() {
 			//console.log(this.frequencies);
 			var table = new Array();
+			
 			for (words in this.frequencies) {
 				table.push([words, this.frequencies[words]]);
 			}
-			tableResult.dataTable().fnClearTable();
-			tableResult.dataTable().fnAddData(table);
+			
+			if (table.length > 0) {
+				tableResult.dataTable().fnClearTable();
+				tableResult.dataTable().fnAddData(table);
+				$('#table-results_wrapper').show();
+				$('#initial-text').hide();
+			} else {
+				$('#table-results_wrapper').hide();
+				$('#initial-text').show();
+			}
 		},
         
         countAndDeleteJoins: function() {

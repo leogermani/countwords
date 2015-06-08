@@ -6,7 +6,14 @@
     transition: none;
 }​
 
-.DTTT_container {
+.DTTT_container, #ToolTables_table-results_0 {
 	margin-left: 1em !important;
 }
 
+#submit_count {
+	margin-top: 1em;
+}
+
+#table-results_wrapper {
+	display: none;
+}

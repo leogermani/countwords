@@ -48,12 +48,13 @@
     
         <div class="col-md-3 col-md-offset-1">
             
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title">Paste your text here</h3>
               </div>
               <div class="panel-body">
                 <textarea id="string_input" class="form-control" ></textarea>
+                 <a href="#" class="btn btn-block  btn-primary" id="submit_count"><span class="glyphicon glyphicon-zoom-in"></span> Count!</a>
               </div>
             </div>
             
@@ -90,14 +91,16 @@
               <div class="panel-body">
                 <p>Insert the sentences you want to add, e.g. "Latin America" (one sentence per line). Each sentence will be interpreted as if it was a single word</p>
                 <textarea id="joins_input" class="form-control" rows="5" ></textarea>
+               
               </div>
             </div>
             
             
         </div>
         <div class="col-md-6 ">
-            <a href="#" class="btn btn-block btn-lg btn-primary" id="submit_count"><span class="glyphicon glyphicon-zoom-in"></span> Count!</a>
-            <br/>
+			
+		  <div class="alert alert-info" id="initial-text" role="alert">Paste your text and click on "Count!"</div>
+			
           <table class="table table-striped" id="table-results">
             <thead>
               <tr>
