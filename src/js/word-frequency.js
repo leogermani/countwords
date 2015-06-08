@@ -56,7 +56,16 @@ $(function() {
 				w.ignorePunctuation = $(this).is(':checked');
 			});
             
-            
+            $('#table-results').on('click', '.remove-word', function() {
+				var word = $(this).data('word');
+				var index = $(this).data('index');
+				
+				if ($('#excluded_input').val() != '')
+					word = "\n" + word;
+				$('#excluded_input').val( $('#excluded_input').val() + word );
+				
+				w.tableResult.dataTable().api().row( $(this).parents('tr') ).remove().draw( false );
+			});
             
             $('#submit_count').click(function() {
 				$(this).addClass('disabled');
@@ -122,19 +131,6 @@ $(function() {
 				this.tableResult.dataTable().fnAddData(table);
 				$('#table-results_wrapper').show();
 				$('#initial-text').hide();
-				
-				
-				var _t = this;
-				$('a.remove-word').click(function() {
-					var word = $(this).data('word');
-					var index = $(this).data('index');
-					
-					if ($('#excluded_input').val() != '')
-						word = "\n" + word;
-					$('#excluded_input').val( $('#excluded_input').val() + word );
-					
-					_t.tableResult.dataTable().api().row( $(this).parents('tr') ).remove().draw();
-				});
 			} else {
 				$('#table-results_wrapper').hide();
 				$('#initial-text').show();
