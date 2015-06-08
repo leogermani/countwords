@@ -23,7 +23,7 @@ $(function() {
 					"aButtons": [{
 						"sExtends": "collection",
 						"sButtonText": "Download",
-						"aButtons": [ "csv", "xls" ]
+						"aButtons": [ "copy", "csv", "xls" ]
 					}] 
 				},
 				"fnCreatedRow": function( nRow, aData, iDataIndex ) {
