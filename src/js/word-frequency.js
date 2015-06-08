@@ -166,7 +166,10 @@ $(function() {
                 for( i=0; i<words.length; i++ ) {
                     word = words[i];
                     if (word.length > 0) {
-                        this.frequencies[word] = this.frequencies[word] || 0;
+                        
+                        if (typeof(this.frequencies[word]) != 'number')
+							this.frequencies[word] = 0;
+                        
                         this.frequencies[word]++;
                         $('#processing-current-word').html(word);
                     }
